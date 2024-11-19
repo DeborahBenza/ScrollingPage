@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ScrollingPage</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
-<p>hallo hannah</p>
-<p>hallo marlene</p>
+
+    <p>hallo hannah</p>
+    <p>hallo marlene</p>
+
+    <div id="backround-container" class="backround-container">
+        <div id="video-container" class="video-container">
+            <video src="main.js" type="video/mp4" id="bgvideo"></video>
+        </div>
+    </div>
+
+    <div class="scroll-container" id="scroll-container">
+        <section class="step">
+            <div>
+                <h3>Hello</h3>
+            </div>
+        </section>
+    </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script> <!--Über Main Script-->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="main.js"></script>
 </body>
+
 </html>
