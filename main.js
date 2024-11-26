@@ -1,76 +1,68 @@
 // Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-// Get the background video element
+// Get the elements
 const bgvideo = document.querySelector('#bgvideo');
+const imageContainer = document.querySelector('#image-container');
+const scrollContainer = document.querySelector('#scroll-container');
 
-// Pause the video and set it to the beginning
-bgvideo.pause();
-bgvideo.currentTime = 0;
+// Variables to track state
+let isVideoLoaded = false;
+let placeholderDuration = 10; // Default duration for placeholder video
 
-// Variables to track scroll state
-let lastScrollTop = 0;
-let isScrolling = false;
-let scrollTimeout;
+// Preload video
+bgvideo.preload = 'auto';
 
-function handleScroll() {
-    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollDelta = currentScrollTop - lastScrollTop;
+// Function to initialize the scroll trigger
+function initScrollTrigger(videoDuration) {
+    console.log("Initializing with video duration: " + videoDuration + " seconds");
 
-    // Clear the previous timeout
-    clearTimeout(scrollTimeout);
+    // Set the scroll container height based on video duration
+    const scrollHeight = videoDuration * 60; // 60vh per second
+    scrollContainer.style.height = `${scrollHeight}vh`;
 
-    // Set isScrolling to true
-    isScrolling = true;
+    // Create a ScrollTrigger for smooth scrolling
+    ScrollTrigger.create({
+        trigger: scrollContainer,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true, // Smooth scrubbing
+        onUpdate: (self) => {
+            const progress = self.progress; // Scroll progress
+            bgvideo.currentTime = progress * videoDuration;
 
-    // Calculate the video progress based on scroll position
-    const scrollProgress = currentScrollTop / (document.documentElement.scrollHeight - window.innerHeight);
-    bgvideo.currentTime = scrollProgress * bgvideo.duration;
-
-    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // Prevent negative scroll
-
-    // Set a timeout to pause the video when scrolling stops
-    scrollTimeout = setTimeout(() => {
-        isScrolling = false;
-        bgvideo.pause();
-    }, 50); // Adjust this value to change how quickly the video pauses after scrolling stops
+            // Update video and image opacity
+            const opacity = 1 - Math.abs(progress);
+            bgvideo.style.opacity = opacity;
+            imageContainer.style.opacity = 1 - opacity;
+        }
+    });
 }
 
-// Add an event listener for the scroll event
-window.addEventListener('scroll', handleScroll);
+// Function to check and initialize with placeholder duration
+function initializeWithPlaceholder() {
+    if (!isVideoLoaded) {
+        console.log("Initializing with placeholder duration...");
+        initScrollTrigger(placeholderDuration);
+    }
+}
 
-// Create a ScrollTrigger for smooth scrolling
-ScrollTrigger.create({
-    trigger: ".scroll-container",
-    start: "top top",
-    end: "bottom bottom",
-    scrub: true
+// Event listener for when video metadata is loaded
+bgvideo.addEventListener('loadedmetadata', function () {
+    isVideoLoaded = true;
+    const videoDuration = bgvideo.duration || placeholderDuration;
+    initScrollTrigger(videoDuration); // Reinitialize ScrollTrigger with actual duration
 });
 
-function hideContent() {
-    contents.forEach(content => {
-        content.classList.remove('visible');
-    });
-}
+// If video is taking too long to load, initialize with placeholder
+setTimeout(initializeWithPlaceholder, 2000); // 2-second timeout
 
-function showContent() {
-    contents.forEach(content => {
-        content.classList.add('visible');
-    });
-}
-// Add an event listener for the scroll event
-window.addEventListener('scroll', handleScroll);
-
-// Listen for video end
-bgvideo.addEventListener('ended', showContent);
-// Create ScrollTrigger for each section (optional, for pinning behavior)
-let sections = gsap.utils.toArray('.step');
-sections.forEach((step) => {
-    ScrollTrigger.create({
-        trigger: step,
-        start: 'top top',
-        pin: true,
-        pinSpacing: false
+// Optimize video playback
+bgvideo.addEventListener('canplay', function () {
+    bgvideo.play().then(() => {
+        bgvideo.pause(); // Pause to wait for user scroll
+    }).catch(error => {
+        console.error("Error attempting to play video:", error);
     });
 });
 
