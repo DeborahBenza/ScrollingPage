@@ -78,3 +78,9 @@ body, html {
 .content.visible {
     opacity: 1;
 }
+
+.text-container {
+    font-size: 10rem;
+    opacity: 0; /* Startpunkt für das Einfaden */
+    transform: scale(0.5); /* Startgröße */
+}

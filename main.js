@@ -65,3 +65,14 @@ bgvideo.addEventListener('canplay', function () {
         console.error("Error attempting to play video:", error);
     });
 });
+
+// Wähle das Element aus
+const textContainer = document.querySelector('.text-container');
+
+// Text-Animation: Skalieren und Einfaden
+gsap.to(textContainer, {
+    opacity: 1, // Sichtbarkeit herstellen
+    scale: 1, // Von kleiner zu normaler Größe skalieren
+    duration: 5, // Dauer der Animation
+    ease: 'power2.out', // Sanfter Übergang
+});
