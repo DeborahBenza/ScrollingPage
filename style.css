@@ -7,45 +7,35 @@ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
 }
 
-html {
-height: 100%;
-}
-
-body {
+body, html {
+    margin: 0;
+    padding: 0;
     height: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
 }
 
 .background-container {
-    width: 100%;
-    height: 100vh;
     position: fixed;
-    display: flex;
-    align-items: center;
-    bottom: 0;
+    top: 0;
     left: 0;
-    overflow: hidden;
-    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
 .video-container {
     width: 100%;
     height: 100%;
-    flex: 1;
-    display: flex;
-    justify-content: center;
 }
 
-video#bgvideo {
-    flex: 1;
-    background: #000;
-    opacity: 1;
-    visibility: visible;
+#bgvideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.scrolling-container {
-    overflow: hidden;
+.scroll-container {
+    height: 300%; /* Adjust this value to control scroll length */
+    position: relative;
 }
 
 .step {
@@ -67,5 +57,13 @@ video#bgvideo {
     font-family: 700;
     font-size: 40px;
     text-shadow: 2px 2px #000;
+    opacity: 1;
+}/* Fügen Sie dies zu Ihren bestehenden Styles hinzu */
+.content {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.content.visible {
     opacity: 1;
 }

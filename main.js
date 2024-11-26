@@ -8,48 +8,68 @@ const bgvideo = document.querySelector('#bgvideo');
 bgvideo.pause();
 bgvideo.currentTime = 0;
 
-// Function to update the playback speed based on scroll velocity
+// Variables to track scroll state
 let lastScrollTop = 0;
+let isScrolling = false;
+let scrollTimeout;
 
 function handleScroll() {
     const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollDelta = currentScrollTop - lastScrollTop;
 
-    // Set video playback speed based on scroll direction and speed
-    if (scrollDelta > 0) {
-        bgvideo.playbackRate = Math.min(3, Math.max(1, scrollDelta / 10)); // Adjust speed as needed
-        bgvideo.play();
-    } else if (scrollDelta < 0) {
-        bgvideo.playbackRate = Math.min(3, Math.max(1, Math.abs(scrollDelta / 10))); // Adjust speed as needed
-        bgvideo.play();
-    } else {
-        bgvideo.pause();
-    }
+    // Clear the previous timeout
+    clearTimeout(scrollTimeout);
+
+    // Set isScrolling to true
+    isScrolling = true;
+
+    // Calculate the video progress based on scroll position
+    const scrollProgress = currentScrollTop / (document.documentElement.scrollHeight - window.innerHeight);
+    bgvideo.currentTime = scrollProgress * bgvideo.duration;
 
     lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // Prevent negative scroll
+
+    // Set a timeout to pause the video when scrolling stops
+    scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+        bgvideo.pause();
+    }, 50); // Adjust this value to change how quickly the video pauses after scrolling stops
 }
 
 // Add an event listener for the scroll event
 window.addEventListener('scroll', handleScroll);
 
-// Ensure the video pauses when scrolling stops
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-        bgvideo.pause(); // Pause the video when scrolling stops
-    }, 200); // Adjust delay for stopping the video
+// Create a ScrollTrigger for smooth scrolling
+ScrollTrigger.create({
+    trigger: ".scroll-container",
+    start: "top top",
+    end: "bottom bottom",
+    scrub: true
 });
 
+function hideContent() {
+    contents.forEach(content => {
+        content.classList.remove('visible');
+    });
+}
+
+function showContent() {
+    contents.forEach(content => {
+        content.classList.add('visible');
+    });
+}
+// Add an event listener for the scroll event
+window.addEventListener('scroll', handleScroll);
+
+// Listen for video end
+bgvideo.addEventListener('ended', showContent);
 // Create ScrollTrigger for each section (optional, for pinning behavior)
 let sections = gsap.utils.toArray('.step');
 sections.forEach((step) => {
     ScrollTrigger.create({
         trigger: step,
-        start: 'top bottom',
-        end: 'bottom top',
+        start: 'top top',
         pin: true,
-        pinSpacing: false,
-        anticipatePin: 1,
+        pinSpacing: false
     });
 });
