@@ -2,7 +2,9 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Rockwell, Courier Bold, Courier, Georgia, Times, Times New Roman, Serifenschrift;
+    font-style: normal;
+
 }
 
 body, html {
@@ -97,10 +99,15 @@ body, html {
   
   .text > h1 {
     max-width: 90vw;
+    padding-left: 90px;
+    padding-right: 50px;
     margin: auto;
     line-height: 1.2;
-    font-size: 60px;
-    color: gold;
+    font-size: 50px;
+    color: #3F2415;
+    text-shadow: #000;
+    scrollbar-shadow-color: #000;
+    
   }
   
   .text {
@@ -111,7 +118,7 @@ body, html {
     width: 100%;
     height: 115%;
     position: absolute;
-    background: #161616;
+    background: #3F2415;
     left: 0;
     top: 0;
     opacity: 0.8;

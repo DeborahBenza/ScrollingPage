@@ -103,7 +103,7 @@ function makeItHappen() {
         markers: {
           startColor: "white",
           endColor: "#42a6e0",
-          fontSize: "12px",
+          fontSize: "50px",
           indent: 10
         },
         scrub: true,
