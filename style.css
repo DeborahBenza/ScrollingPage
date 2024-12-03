@@ -88,3 +88,35 @@ body, html {
     opacity: 0; /* Startpunkt für das Einfaden */
     transform: scale(0.5); /* Startgröße */
 }
+
+
+
+#smooth-content {
+    will-change: transform;
+  }
+  
+  .text > h1 {
+    max-width: 90vw;
+    margin: auto;
+    line-height: 1.2;
+    font-size: 60px;
+    color: gold;
+  }
+  
+  .text {
+    padding: 10vh 0;
+  }
+  
+  .mask {
+    width: 100%;
+    height: 115%;
+    position: absolute;
+    background: #161616;
+    left: 0;
+    top: 0;
+    opacity: 0.8;
+  }
+  
+  .red {
+    color: red;
+  }
