@@ -74,55 +74,47 @@ bgvideo.addEventListener('canplay', function () {
 });
 
 // Ensure image container is visible
+// Ensure image container is visible
 imageContainer.style.display = 'none'; // Initially hide
 
+// SplitText
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 
-gsap.config({ trialWarn: false });
-console.clear();
-gsap.registerPlugin(ScrollTrigger, SplitText, ScrollSmoother);
-let smoother = ScrollSmoother.create({
-  smooth: 2
-});
+let typeSplit;
 
-let split = new SplitText("h1", { type: "lines" });
-let masks;
-function makeItHappen() {
-  masks = [];
-  split.lines.forEach((target) => {
-    let mask = document.createElement("span");
-    mask.className = "mask";
-    target.append(mask);
-    masks.push(mask);
-    gsap.to(mask, {
-      scaleX: 0,
-      transformOrigin: "right center",
-      ease: "none",
-      scrollTrigger: {
-        trigger: target,
-        markers: {
-          startColor: "white",
-          endColor: "#42a6e0",
-          fontSize: "50px",
-          indent: 10
-        },
-        scrub: true,
-        start: "top center",
-        end: "bottom center"
-      }
-    });
+// Split the text up
+function runSplit() {
+  typeSplit = new SplitType(".split-word", {
+    types: "lines, words"
   });
+  $(".word").append("<div class='line-mask'></div>");
+  createAnimation();
 }
 
-window.addEventListener("resize", newTriggers);
+runSplit();
 
-function newTriggers() {
-  ScrollTrigger.getAll().forEach((trigger, i) => {
-    trigger.kill();
-    masks[i].remove();
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
+
+// Create staggered animation
+function createAnimation() {
+  let allMasks = $(".word").map(function() {
+    return $(this).find(".line-mask");
+  }).get();
+
+  let tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".split-word",
+      start: "top center",
+      end: "bottom center",
+      scrub: 1
+    }
   });
-  split.split();
-  makeItHappen();
-}
 
-makeItHappen();
+  tl.to(allMasks, {
+    width: "0%",
+    duration: 1,
+    stagger: 0.5
+  });
+}
