@@ -31,10 +31,17 @@ function initScrollTrigger(videoDuration) {
             const progress = self.progress; // Scroll progress
             bgvideo.currentTime = progress * videoDuration;
 
-            // Update video and image opacity
-            const opacity = 1 - Math.abs(progress);
-            bgvideo.style.opacity = opacity;
-            imageContainer.style.opacity = 1 - opacity;
+            console.log("Scroll progress:", progress); // Log the progress
+            // Update video and image visibility
+            if (progress > 0.99) { // Changed from >= 1 to > 0.99
+                console.log("Showing image"); // Log when image should show
+                bgvideo.style.display = 'none';
+                imageContainer.style.display = 'block';
+            } else {
+                console.log("Showing video"); // Log when video should show
+                bgvideo.style.display = 'block';
+                imageContainer.style.display = 'none';
+            }
         }
     });
 }
@@ -66,13 +73,48 @@ bgvideo.addEventListener('canplay', function () {
     });
 });
 
-// Wähle das Element aus
-const textContainer = document.querySelector('.text-container');
+// Ensure image container is visible
+// Ensure image container is visible
+imageContainer.style.display = 'none'; // Initially hide
 
-// Text-Animation: Skalieren und Einfaden
-gsap.to(textContainer, {
-    opacity: 1, // Sichtbarkeit herstellen
-    scale: 1, // Von kleiner zu normaler Größe skalieren
-    duration: 5, // Dauer der Animation
-    ease: 'power2.out', // Sanfter Übergang
-});
+// SplitText
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
+
+let typeSplit;
+
+// Split the text up
+function runSplit() {
+  typeSplit = new SplitType(".split-word", {
+    types: "lines, words"
+  });
+  $(".word").append("<div class='line-mask'></div>");
+  createAnimation();
+}
+
+runSplit();
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
+
+// Create staggered animation
+function createAnimation() {
+  let allMasks = $(".word").map(function() {
+    return $(this).find(".line-mask");
+  }).get();
+
+  let tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".split-word",
+      start: "top center",
+      end: "bottom center",
+      scrub: 1
+    }
+  });
+
+  tl.to(allMasks, {
+    width: "0%",
+    duration: 1,
+    stagger: 0.5
+  });
+}

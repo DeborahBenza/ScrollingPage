@@ -2,7 +2,9 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Rockwell, Courier Bold, Courier, Georgia, Times, Times New Roman, Serifenschrift;
+    font-style: normal;
+
 }
 
 body, html {
@@ -23,24 +25,25 @@ body, html {
     z-index: -1;
 }
 
-.video-container, .image-container {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
 
-#bgvideo, #bgimage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    .image-container {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 
-.image-container {
-    opacity: 0; /* Begin with the image hidden */
-    /* Kein Übergang hier, Bild erscheint sofort */
-}
+    #bgimage {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+    }
+
+
+    .image-container {
+        display: none; /* Initially hide the image */
+    }
 
 .video-container {
     opacity: 1; /* Video ist anfangs sichtbar */
@@ -87,4 +90,59 @@ body, html {
     opacity: 0; 
     transform: scale(0.5); 
     margin: 50px;
+
+    font-size: 10rem;
+    opacity: 0; /* Startpunkt für das Einfaden */
+    transform: scale(0.5); /* Startgröße */
 }
+
+
+
+#smooth-content {
+    will-change: transform;
+  }
+  
+  .text > h1 {
+    max-width: 90vw;
+    padding-left: 90px;
+    padding-right: 50px;
+    margin: auto;
+    line-height: 1.2;
+    font-size: 50px;
+    color: #3F2415;
+    text-shadow: #000;
+    scrollbar-shadow-color: #000;
+    
+  }
+  
+  
+  
+  .mask {
+    width: 100%;
+    height: 115%;
+    position: absolute;
+    background: #3F2415;
+    left: 0;
+    top: 0;
+    opacity: 0.8;
+  }
+  
+  .red {
+    color: red;
+  }
+
+
+  .split-word {
+    position: relative;
+    font-size: large;
+  }
+  .line-mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #0d0d0d;
+    opacity: 0.8;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+  }
