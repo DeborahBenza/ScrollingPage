@@ -83,7 +83,8 @@ body, html {
 }
 
 .text-container {
-    font-size: 10rem;
-    opacity: 0; /* Startpunkt für das Einfaden */
-    transform: scale(0.5); /* Startgröße */
+    font-size: 8rem;
+    opacity: 0; 
+    transform: scale(0.5); 
+    margin: 50px;
 }
