@@ -118,3 +118,12 @@ function createAnimation() {
     stagger: 0.5
   });
 }
+
+
+
+
+
+
+
+
+//smoke effect
