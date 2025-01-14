@@ -437,8 +437,14 @@ function m( t ) {
 
 }
 
+
 window.onload = function() {
-    m( "h1" );
+    m("h1");
+    m("myButton");
 };
 
+document.getElementById("myButton").addEventListener("click", function() {
+    console.log("Märchenreise wurde gestartet...");
+    alert("Bist du bereit ein zauberhaftes Märchen zu erleben?");
+});
 
