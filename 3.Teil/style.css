@@ -1,0 +1,38 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.marionette__container {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.story {
+  padding: 2rem;
+}
+
+.story__content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.blurb {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .blurb {
+    font-size: 1.5rem;
+  }
+}

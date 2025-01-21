@@ -448,3 +448,11 @@ document.getElementById("myButton").addEventListener("click", function() {
     alert("Bist du bereit ein zauberhaftes Märchen zu erleben?");
 });
 
+
+
+
+
+//nach button/start der scrolling page/ Buch blättert
+//--------------------------------------------------------------------------------------------------
+
+
