@@ -25,12 +25,22 @@
   --pupil: #f2f2f2;
   --mouth: #1a1a1a;
 }
+
 body {
   width: 100vw;
   font-family: sans-serif;
   overflow-x: hidden;
- background-image: url(./backround.png);
+ background-image: url(backgroundProbe.png);
 }
+/*body {
+  background-image: 
+    url(waldNeu.png), /* Vordergrundbild 
+    url(./backround.png); /* Hintergrundbild 
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-size: contain, cover;
+}*/
+
 .cap {
   fill: var(--cap);
 }

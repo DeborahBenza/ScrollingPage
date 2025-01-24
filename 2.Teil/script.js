@@ -53,7 +53,7 @@ BLURB_TWO.forEach((word, index) => {
 });
 // Show the marionette
 to(CONTAINER, {
-  scale: 1,
+  scale: 0.3,
   scrollTrigger: {
     scrub: true,
     start: () => BUFF_TWO,
