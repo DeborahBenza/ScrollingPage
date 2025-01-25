@@ -147,73 +147,28 @@ sun2.to("#sun", { attr: { offset: "0.1" } }, 0.5); // Decrease offset to make su
 sun2.to("#bg_grad stop:nth-child(2)", { attr: { offset: "0.2" } }, 0.5); // Adjust background gradient
 sun2.to("#sun", { attr: { "stop-color": "#FDB813" } }, 0.5); // Change color back to original
 
-/* Transition (from Scene2 to Scene3) */
-gsap.set("#scene3", { y: height - 40, visibility: "visible" });
-let sceneTransition = gsap.timeline();
-ScrollTrigger.create({
-    animation: sceneTransition,
-    trigger: ".scrollElement",
-    start: "60% top",
-    end: "bottom 100%",
-    scrub: 3
-});
 
-sceneTransition.to("#h2-1", { y: -height - 100, scale: 1.5, transformOrigin: "50% 50%" }, 0);
-sceneTransition.to("#bg_grad", { attr: { cy: "-80" } }, 0.0);
-sceneTransition.to("#bg2", { y: 0 }, 0);
-
-// Existing scene3 code
-let scene3 = gsap.timeline();
-ScrollTrigger.create({
-    animation: scene3,
-    trigger: ".scrollElement",
-    start: "70% 50%",
-    end: "bottom 100%",
-    scrub: 3
-});
-
-//Hills motion
-scene3.fromTo("#h3-1", { y: 300 }, { y: -550 }, 0);
-scene3.fromTo("#h3-2", { y: 800 }, { y: -550 }, 0.03);
-scene3.fromTo("#h3-3", { y: 600 }, { y: -550 }, 0.06);
-scene3.fromTo("#h3-4", { y: 800 }, { y: -550 }, 0.09);
-scene3.fromTo("#h3-5", { y: 1000 }, { y: -550 }, 0.12);
-
-//gradient value change
-scene3.to("#bg2-grad", { attr: { cy: 600 } }, 0);
-scene3.to("#bg2-grad", { attr: { r: 500 } }, 0);
-
-// New code to add: Final scene with everything moving up and green background
+// New final scene with upward movement and fade-out
 let finalScene = gsap.timeline();
 ScrollTrigger.create({
     animation: finalScene,
     trigger: ".scrollElement",
     start: "85% top",
-    end: "bottom 100%",
-    scrub: 3
+    end: "bottom bottom",
+    scrub: 1,
+    onEnter: () => {
+        gsap.to("body", { backgroundColor: "#00a86b", duration: 1 });
+    }
 });
 
-// Move all elements up
-finalScene.to("svg > *", { y: "-100%", duration: 1 }, 0);
+// Move all SVG elements up and fade them out
+finalScene.to("svg > *", { 
+    y: "-100%", // Moves all elements completely out of view upward
+    opacity: 0, // Fades out all elements
+    duration: 2, // Slightly increased duration for smoother animation
+    stagger: 0.05, // Adds a cascading delay between each element
+    ease: "power2.inOut" // Easing for smoother motion
+}, 0);
 
-// Create a green background
-finalScene.fromTo("body", 
-    { backgroundColor: "transparent" }, 
-    { backgroundColor: "#00a86b", duration: 1 }, 
-    0
-);
-
-// Fade out all SVG elements
-finalScene.to("svg > *", { opacity: 0, duration: 0.5 }, 0.5);
-//reset scrollbar position after refresh
-window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-};
-
-// function screenToSVG(svg, x, y) {
-//     var pt = svg.createSVGPoint();
-//     pt.x = x;
-//     pt.y = y;
-//     var cursorPt = pt.matrixTransform(svg.getScreenCTM().inverse());
-//     return { x: Math.floor(cursorPt.x), y: Math.floor(cursorPt.y) }
-// }
+// Ensure the green background stays visible after all elements move out
+finalScene.to("body", { backgroundColor: "#00a86b", duration: 1 }, 0);
