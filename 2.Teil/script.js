@@ -149,3 +149,6 @@ if (window.location.hash === '#end') {
       behavior: 'smooth' // Smooth scrolling für ein angenehmeres Erlebnis
   });
 }
+
+
+
