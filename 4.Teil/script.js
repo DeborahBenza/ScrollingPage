@@ -43,7 +43,7 @@ scene1.to("#cloudStart-L", { x: -300 }, 0);
 scene1.to("#cloudStart-R", { x: 300 }, 0);
 
 //animate text
-scene1.to("#info", { y: 8 * speed }, 0);
+scene1.to("#info", { y: 5 * speed }, 0);
 
 /*   Bird   */
 gsap.fromTo(
