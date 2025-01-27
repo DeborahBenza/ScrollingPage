@@ -87,3 +87,4 @@ letters.forEach((letter, i) => {
 requestAnimationFrame(() => {
   document.querySelector('svg').style.opacity = 1;
 });
+
