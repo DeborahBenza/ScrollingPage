@@ -25,6 +25,14 @@ svg {
     top: 0;
     z-index: 4;
 }
+.info {
+    opacity: 0; /* Beginnen Sie mit dem gesamten info-Block unsichtbar */
+}
+
+.reveal-text {
+    color: transparent; /* Beginnen Sie mit transparentem Text */
+    display: inline-block; /* Stellt sicher, dass jeder Buchstabe als Block für die Animation behandelt wird */
+}
 
 
 /* MARK: ---0-490 Mobile */
