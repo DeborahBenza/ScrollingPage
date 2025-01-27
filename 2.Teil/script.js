@@ -142,3 +142,10 @@ window.addEventListener('scroll', () => {
       window.location.href = '../3.Teil/index.html';
   }
 });
+
+if (window.location.hash === '#end') {
+  window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth' // Smooth scrolling für ein angenehmeres Erlebnis
+  });
+}
