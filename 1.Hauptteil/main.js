@@ -445,9 +445,8 @@ window.onload = function() {
 
 document.getElementById("myButton").addEventListener("click", function() {
     console.log("Märchenreise wurde gestartet...");
-    alert("Bist du bereit ein zauberhaftes Märchen zu erleben?");
+    window.location.href = '../2.Teil/rotkappchen.html';
 });
-
 
 
 
