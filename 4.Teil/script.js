@@ -43,7 +43,17 @@ scene1.to("#cloudStart-L", { x: -300 }, 0);
 scene1.to("#cloudStart-R", { x: 300 }, 0);
 
 //animate text
-scene1.to("#info", { y: 5 * speed }, 0);
+//scene1.to("#info", { y: 5 * speed }, 0);
+// Optimierte Animation mit GSAP
+scene1.to("#info", { 
+    y: 5 * speed,        // Vertikale Bewegung
+    opacity: 1,          // Sicherstellen, dass das Element sichtbar ist
+    ease: "power2.out",  // Weiche Bewegung (Easing)
+    stagger: 0.2         // Zeitliche Staffelung, falls mehrere Elemente im Text enthalten sind
+
+    
+}, 0);
+
 
 /*   Bird   */
 gsap.fromTo(
