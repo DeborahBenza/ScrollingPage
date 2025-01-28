@@ -33,7 +33,7 @@ BLURB_ONE.forEach((word, index) => {
       scrub: true,
       start: () => BUFF_ONE + index * INC,
       end: () => BUFF_ONE + index * INC + INC,
-      markers: true // Add markers for debugging
+      markers: false // Add markers for debugging
     },
     opacity: 0
   });
@@ -46,7 +46,7 @@ BLURB_TWO.forEach((word, index) => {
       scrub: true,
       start: () => BUFF_TWO + index * INC,
       end: () => BUFF_TWO + index * INC + INC,
-      markers: true
+      markers: false
     },
     opacity: 1
   });
@@ -58,7 +58,7 @@ to(CONTAINER, {
     scrub: true,
     start: () => BUFF_TWO,
     end: () => BUFF_TWO + BLURB_TWO.length * INC + INC,
-    markers: true
+    markers: false
   }
 });
 
@@ -70,7 +70,7 @@ BLURB_TWO.forEach((word, index) => {
       scrub: true,
       start: () => BUFF_THREE + index * INC,
       end: () => BUFF_THREE + index * INC + INC,
-      markers: true
+      markers: false
     },
     opacity: 0
   });
@@ -84,7 +84,7 @@ BLURB_THREE.forEach((word, index) => {
       scrub: true,
       start: () => BUFF_FOUR + index * INC,
       end: () => BUFF_FOUR + index * INC + INC,
-      markers: true
+      markers: false
     },
     opacity: 1
   });
@@ -97,7 +97,7 @@ to(MOUTH, {
     scrub: true,
     start: () => BUFF_FOUR,
     end: () => BUFF_FIVE + BLURB_FOUR.length * INC + INC,
-    markers: true
+    markers: false
   }
 });
 
@@ -108,7 +108,7 @@ BLURB_FOUR.forEach((word, index) => {
       scrub: true,
       start: () => BUFF_FIVE + index * INC,
       end: () => BUFF_FIVE + index * INC + INC,
-      markers: true
+      markers: false
     }
   });
 });
@@ -134,3 +134,21 @@ blink(EYES);
 document.body.style.height = `${
   BUFF_FIVE + BLURB_FOUR.length * INC + INC + PADDING + window.innerHeight
 }px`;
+
+window.addEventListener('scroll', () => {
+  // Prüfen, ob das Ende der Seite erreicht wurde
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      // Weiterleiten zur neuen Seite
+      window.location.href = '../3.Teil/index.html';
+  }
+});
+
+if (window.location.hash === '#end') {
+  window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth' // Smooth scrolling für ein angenehmeres Erlebnis
+  });
+}
+
+
+
