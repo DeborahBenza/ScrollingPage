@@ -8,10 +8,11 @@
   box-sizing: border-box;
 }
 
-body {
+.bodyteilfünf {
   background: #00211c;
   font-family: "Jungle_Roar";
   height: 400vh;
+  width: 100vw;
 }
 
 svg {
@@ -23,40 +24,19 @@ svg {
   opacity: 0;
 }
 
-.leave-1 {
-  width: 100%;
-  height: 100%;
-  bottom: -3vw;
-  left: -3vw;
+.rightLeave, .leftLeave {
+  position: absolute;
+  bottom: 0;
 }
 
-.leave-2 {
-  bottom: -3vw;
-  right: -3vw;
-  width: 100vw;
-  transform: scale(-1, 1);
+.rightLeave {
+  margin-left: 70%;
+  transform: translateX(-50%);
 }
 
-.st0 {
-  fill: #358554;
+.leftLeave {
+ 
+  transform: translateX(50%) scale(-1, 1);
 }
 
-.st1 {
-  fill: #04392C;
-}
 
-.st2 {
-  fill: #1D674B;
-}
-
-.st3 {
-  fill: #1D4D3D;
-}
-
-.st4 {
-  fill: #A38D41;
-}
-
-.st5 {
-  fill: #6BA682;
-}
