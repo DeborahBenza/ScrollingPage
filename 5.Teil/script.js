@@ -1,90 +1,77 @@
 console.clear();
 
-const leftLeaves = document.querySelectorAll('[href="#leftLeave"]');
-const rightLeaves = document.querySelectorAll('[href="#rightLeave"]');
-const smallLeaves = document.querySelectorAll('[href="#smallLeaf"]');
-const text = document.querySelector('.text');
-const letters = document.querySelectorAll('.text path');
-leftLeaves.forEach((leaf, i) => {
-  const index = i / (leftLeaves.length - 1);
-  gsap.set(leaf, {
-    rotate: index * -45 + 10,
-    transformOrigin: 'right bottom'
-  });
-  gsap.to(leaf, {
-    scrollTrigger: {
-      trigger: "body",
-      scrub: 0.2,
-      start: `${index * 40}% top`,
-      end: `${index * 60 + 40}% bottom`,
-    },
-    x: 150,
-    y: 300,
-    rotate: 15 - (Math.sin(index * Math.PI / 2 - (Math.PI / 2)) * 10),
-    scale: 1.3
-  });
-});
-rightLeaves.forEach((leaf, i) => {
-  const index = i / (rightLeaves.length - 1);
-  gsap.set(leaf, {
-    rotate: index * 45 - 10,
-    transformOrigin: 'left bottom'
-  });
-  gsap.to(leaf, {
-    scrollTrigger: {
-      trigger: "body",
-      scrub: 0.2,
-      start: `${index * 40}% top`,
-      end: `${index * 60 + 40}% bottom`,
-    },
-    x: -150,
-    y: 300,
-    rotate: -15 + (Math.sin(index * Math.PI / 2 - (Math.PI / 2)) * 10),
-    scale: 1.3
-  });
-});
+const container = document.querySelector(".bodyteilfünf");
 
-smallLeaves.forEach((leaf, i) => {
-  gsap.set(leaf, {
-    y: Math.random() * 900,
-    x: Math.random() * 1000,
-    scale: Math.random() * 0.5 + 0.2,
-    transformOrigin: '50% 50%'
+// Funktion, um Bäume statisch im Bildschirm zu halten
+function keepLeavesStatic(leaves) {
+  leaves.forEach((leaf) => {
+    gsap.set(leaf, {
+      position: "fixed", // Stelle sicher, dass sie fixiert sind
+      bottom: "0px", // Position am unteren Bildschirmrand
+      transform: "rotate(0deg)" // Sicherstellen, dass die Bäume nicht auf dem Kopf stehen
+    });
   });
-  const start = Math.random() * 40 + 40;
-  const end = Math.min(100, start + Math.random() * 50);
-  gsap.to(leaf, {
-    scrollTrigger: {
-      trigger: "body",
-      scrub: 0.2,
-      start: `top top`,
-      end: `bottom bottom`
-    },
-    scale: Math.random() * 0.5 + 0.2,
-    x: Math.random() * 1600,
-    y: Math.random() * 900,
-    rotate: Math.random() * 1000 + 360
+}
+
+// Funktion, um Bäume zu duplizieren und mit 100px Abstand zu positionieren
+function distributeLeaves(originalId, count, direction) {
+  const original = document.getElementById(originalId);
+  const duplicates = [];
+
+  for (let i = 0; i < count; i++) {
+    const clone = original.cloneNode(true);
+    clone.id = `${originalId}-clone-${i + 1}`;
+    clone.style.position = "fixed"; // Fixiere die Position der Kopien
+    if (direction === "right") {
+      clone.style.left = `${parseInt(original.style.left || 0) + 100 * (i + 1)}px`; // Abstand von 100px pro Kopie nach rechts
+    } else if (direction === "left") {
+      clone.style.left = `${parseInt(original.style.left || 0) - 100 * (i + 1)}px`; // Abstand von 100px pro Kopie nach links
+    }
+    clone.style.transform = "rotate(0deg)"; // Sicherstellen, dass die Bäume korrekt ausgerichtet sind
+    container.appendChild(clone);
+    duplicates.push(clone);
+  }
+
+  return duplicates;
+}
+
+// Animation der Skalierung und Bewegung beim Scrollen
+function animateLeaves(leaves) {
+  leaves.forEach((leaf, index) => {
+    const scale = 1.2; // Vordergrund größer
+
+    gsap.fromTo(
+      leaf,
+      { scale: scale, x: 0 },
+      {
+        scale: scale + 0.5, // Bäume werden während des Scrollens größer
+        x: index % 2 === 0 ? -window.innerWidth : window.innerWidth, // Bewegung nach links/rechts
+        scrollTrigger: {
+          trigger: container,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      }
+    );
   });
-});
+}
 
-letters.forEach((letter, i) => {
-  gsap.from(letter, {
-    scrollTrigger: {
-      trigger: "body",
-      scrub: 0.2,
-      start: `${(i / (letters.length - 1)) * 50 + 30}% bottom`,
-      end: `${(i / (letters.length - 1)) * 50 + 50}% bottom`
-    },
-    opacity: 0,
-    y: '+=100',
-    rotate: 180,
-    scale: 2,
-    transformOrigin: '50% 50%'
-  });
-});
+// Originale Elemente und Duplikate vorbereiten
+const leftLeaves = [
+  document.querySelector("#leftLeave"),
+  ...distributeLeaves("leftLeave", 5, "right") // Linke Bäume 5x nach rechts duplizieren
+];
 
-// Hack to hide the render of the SVG
-requestAnimationFrame(() => {
-  document.querySelector('svg').style.opacity = 1;
-});
+const rightLeaves = [
+  document.querySelector("#rightLeave"),
+  ...distributeLeaves("rightLeave", 5, "left") // Rechte Bäume 5x nach links duplizieren
+];
 
+// Linke und rechte Bäume statisch positionieren
+keepLeavesStatic(leftLeaves);
+keepLeavesStatic(rightLeaves);
+
+// Animationen anwenden
+animateLeaves(leftLeaves); // Animation für linke Bäume
+animateLeaves(rightLeaves); // Gleiche Animation für rechte Bäume
