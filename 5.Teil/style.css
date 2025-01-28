@@ -41,12 +41,11 @@ svg {
 
 
 
-.textitext{
- 
+.textitext {
   font-size: 6rem;
   font-weight: 800;
   font-family: 'Montserrat', sans-serif;
-
+  color: #e7dc94;
   text-align: center ;
   position: fixed; 
   top: 50%;
