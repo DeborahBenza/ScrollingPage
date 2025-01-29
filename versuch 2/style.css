@@ -1,0 +1,49 @@
+
+:root {
+  --size: 90;
+  --ar: calc(194.8 / 596.69);
+  --coeff: 1vmin;
+  --width: calc(var(--size) * var(--coeff));
+  --height: calc((var(--size) * var(--ar)) * var(--coeff));
+
+}
+
+
+
+
+
+.storyend {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  overflow: hidden;
+}
+.storyend__content {
+  position: absolute;
+  width: var(--width);
+  left: 50%;
+  transform: translate(-50%, var(--y));
+}
+.storyend__content--bottom {
+  top: 50%;
+  --y: calc(0% + (var(--height) / 2));
+}
+.storyend__content--top {
+  bottom: 50%;
+  --y: calc(0% - (var(--height) / 2));
+}
+.storyend__content--bottom .blurbend {
+  top: 0;
+}
+.storyend__content--top .blurbend {
+  bottom: 0;
+}
+.blurbend {
+  position: absolute;
+  visibility: hidden;
+}
+.blurbend--two .word,
+.blurbend--three .word,
+.blurbend--four .word {
+  opacity: 0;
+}
