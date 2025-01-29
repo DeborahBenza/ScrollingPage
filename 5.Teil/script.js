@@ -75,3 +75,4 @@ keepLeavesStatic(rightLeaves);
 // Animationen anwenden
 animateLeaves(leftLeaves); // Animation für linke Bäume
 animateLeaves(rightLeaves); // Gleiche Animation für rechte Bäume
+
