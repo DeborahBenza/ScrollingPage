@@ -13,3 +13,24 @@ body {
     font-weight: 400;
     src: url('fonts/schoolbell-v18-latin-regular.woff2') format('woff2');
 }
+
+.body-zwei {
+    font-family: 'Schoolbell';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/schoolbell-v18-latin-regular.woff2') format('woff2');
+}
+
+.teil-drei {
+    font-family: 'Schoolbell';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/schoolbell-v18-latin-regular.woff2') format('woff2');
+}
+
+.lauftext {
+    font-family: 'Schoolbell';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/schoolbell-v18-latin-regular.woff2') format('woff2');
+}
