@@ -13,7 +13,7 @@
 
 
 .main-drei {
-  position: fixed;
+  position: relative;
   background:#fff;
   width:100%;
   height:100%;

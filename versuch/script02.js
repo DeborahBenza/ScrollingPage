@@ -131,8 +131,8 @@ const blink = (EYES) => {
 const EYES = document.querySelectorAll(".marionette__eye");
 blink(EYES);
 
-document.body.style.height = `${
-  BUFF_FIVE + BLURB_FOUR.length * INC + INC + PADDING + window.innerHeight
+document.querySelector(".bodyheight").style.height = `${
+  BUFF_FIVE + BLURB_FOUR.length * INC + INC + PADDING + window.innerHeight 
 }px`;
 
 
