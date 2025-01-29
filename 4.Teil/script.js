@@ -181,3 +181,19 @@ finalScene.to("svg > *", {
 
 // Ensure the green background stays visible after all elements move out
 finalScene.to("body", { backgroundColor: "#00a86b", duration: 1 }, 0);
+
+let isScrolling = false;
+
+// Scroll-Event hinzufügen
+window.addEventListener('scroll', () => {
+    // Verhindere mehrfaches Auslösen während des Scrollens
+    if (isScrolling) return;
+
+    // Prüfen, ob der Benutzer am Anfang der Seite ist
+    if (window.scrollY === 0) {
+        isScrolling = true; // Blockiere weitere Scroll-Events
+        
+        // Weiterleiten zur anderen Seite und dort ans Ende scrollen
+        window.location.href = '../versuch/index.html#end'; // `#end`-Anker markieren
+    }
+});
