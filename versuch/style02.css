@@ -27,16 +27,7 @@
 }
 
 
-.body-zwei {
-  width: 100vw;
-  font-family: sans-serif;
-}
 
-.h-zwei {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--color);
-}
 
 .background-zwei {
   background-image: url(assets/backround.png);
