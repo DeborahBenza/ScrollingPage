@@ -1,33 +1,59 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Welcome to the jungle - ScrollTrigger GSAP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-<link rel="stylesheet" href="./style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-  <div class="bodyteilfünf">
- <div>
-    <div class="rightLeave" id="rightLeave">
-        <img src="Tannenbäume.png" alt="rightLeave">
-    </div>
-    <div class="leftLeave" id="leftLeave">
-      <img src="Tannenbäume.png" alt="leftLeave">
-    </div>
+  <div class="realbody">
 
-<div class="textitext">
-  <p>Im Wald traf Rotkäppchen <br>den Wolf!</p>
-</div>
-   
+    <section class="bodyteilfünf">
+      <div>
+        <div class="rightLeave" id="rightLeave">
+          <img src="Tannenbäume.png" alt="rightLeave">
+        </div>
+        <div class="leftLeave" id="leftLeave">
+          <img src="Tannenbäume.png" alt="leftLeave">
+        </div>
+
+        <div class="textitext">
+          <p>Plötzlich erschien <br>der Wolf!</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="bodyteilfünfzwei">
+        <svg class="weeeg" id="pathSvg" viewBox="0 0 1000 1500" width="100%" height="100%">
+          <path id="animatedPath" d="M 5050 2000 Q 1500 1000, 1850 1400 Q 1150 400, 750 600 Q 50 900, 0 0 " fill="none"
+            stroke-linecap="butt" stroke-linejoin="round" />
+        </svg>
+      </div>
+ 
+    <section >
+      <div class="storyend__content storyend__content--top">
+        <h1 class="blurbend blurbend--one" data-splitting="">In ihrem Schock taumelte sie zurück.</h1>
+        <h1 class="blurbend blurbend--three" data-splitting="">war das Gras unter Rotkäppchen</h1>
+      </div>
+      <div class="story__content story__content--bottom">
+        <h1 class="blurbend blurbend--two" data-splitting="">Als man den Schatten des Wolfes weglaufen sah,</h1>
+        <h1 class="blurbend blurbend--four" data-splitting="">ROT gefärbt.</h1>
+      </div>
+    </section>
   </div>
-    
 
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js'></script>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js'></script>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/SplitText3.min.js'></script>
+    <script src="./script.js"></script>
 
-
-  <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js'></script>
-<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js'></script>
-<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/SplitText3.min.js'></script><script  src="./script.js"></script>
-</div>
+  </div>
 </body>
+
 </html>
