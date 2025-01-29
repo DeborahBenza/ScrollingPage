@@ -1,90 +1,183 @@
 console.clear();
 
-const leftLeaves = document.querySelectorAll('[href="#leftLeave"]');
-const rightLeaves = document.querySelectorAll('[href="#rightLeave"]');
-const smallLeaves = document.querySelectorAll('[href="#smallLeaf"]');
-const text = document.querySelector('.text');
-const letters = document.querySelectorAll('.text path');
-leftLeaves.forEach((leaf, i) => {
-  const index = i / (leftLeaves.length - 1);
-  gsap.set(leaf, {
-    rotate: index * -45 + 10,
-    transformOrigin: 'right bottom'
+const container = document.querySelector(".bodyteilfünf");
+
+// 🌲 Funktion, um Bäume statisch im Bildschirm zu halten
+function keepLeavesStatic(leaves) {
+  leaves.forEach((leaf) => {
+    gsap.set(leaf, {
+      position: "fixed",
+      bottom: "0px",
+      transform: "rotate(0deg)"
+    });
   });
-  gsap.to(leaf, {
+}
+
+// 🌲 Funktion, um Bäume zu duplizieren und zu verteilen
+function distributeLeaves(originalId, count, direction) {
+  const original = document.getElementById(originalId);
+  const duplicates = [];
+
+  for (let i = 0; i < count; i++) {
+    const clone = original.cloneNode(true);
+    clone.id = `${originalId}-clone-${i + 1}`;
+    clone.style.position = "fixed";
+
+    if (direction === "right") {
+      clone.style.left = `${parseInt(original.style.left || 0) + 100 * (i + 1)}px`;
+    } else if (direction === "left") {
+      clone.style.left = `${parseInt(original.style.left || 0) - 100 * (i + 1)}px`;
+    }
+
+    clone.style.transform = "rotate(0deg)";
+    container.appendChild(clone);
+    duplicates.push(clone);
+  }
+
+  return duplicates;
+}
+
+// 🌲 Bäume animieren
+function animateLeaves(leaves) {
+  leaves.forEach((leaf, index) => {
+    gsap.fromTo(
+      leaf,
+      { scale: 1.2, x: 0 },
+      {
+        scale: 1.7,
+        x: index % 2 === 0 ? -window.innerWidth : window.innerWidth,
+        scrollTrigger: {
+          trigger: container,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      }
+    );
+  });
+}
+
+// Originale Elemente & Duplikate vorbereiten
+const leftLeaves = [
+  document.querySelector("#leftLeave"),
+  ...distributeLeaves("leftLeave", 5, "right")
+];
+
+const rightLeaves = [
+  document.querySelector("#rightLeave"),
+  ...distributeLeaves("rightLeave", 5, "left")
+];
+
+keepLeavesStatic(leftLeaves);
+keepLeavesStatic(rightLeaves);
+
+animateLeaves(leftLeaves);
+animateLeaves(rightLeaves);
+
+console.clear();
+
+const animatedPath = document.querySelector("#animatedPath");
+const pathLength = animatedPath.getTotalLength();
+
+// Setze die anfänglichen Werte für die Strichanimation
+gsap.set(animatedPath, {
+  strokeDasharray: pathLength,
+  strokeDashoffset: pathLength // Startet mit verstecktem Pfad
+});
+
+// ScrollTrigger für die Pfad-Animation, von unten nach oben
+gsap.to(animatedPath, {
+  strokeDashoffset: 0,  // Der Pfad wird vollständig freigelegt
+  scrollTrigger: {
+    trigger: ".bodyteilfünfzwei",  // Den Bereich, der den Pfad enthält
+    start: "top 70%",   // Beginnt bei 70% des Viewports
+    end: "top 0%",     // Endet bei 20%
+    scrub: true,        // Macht die Animation an den Scrollvorgang gebunden
+   
+  }
+});
+
+
+
+
+
+const INC = 100;
+const PADDING = 200;
+
+const BLURBEND_ONE = [...document.querySelectorAll(".blurbend--one .word")];
+const BLURBEND_TWO = [...document.querySelectorAll(".blurbend--two .word")];
+const BLURBEND_THREE = [...document.querySelectorAll(".blurbend--three .word")];
+const BLURBEND_FOUR = [...document.querySelectorAll(".blurbend--four .word")];
+
+const BUFFEND_ONE = PADDING;
+// Once upon a time
+BLURBEND_ONE.forEach((word, index) => {
+  to(word, {
     scrollTrigger: {
-      trigger: "body",
-      scrub: 0.2,
-      start: `${index * 40}% top`,
-      end: `${index * 60 + 40}% bottom`,
+      scrub: true,
+      start: () => BUFFEND_ONE + index * INC,
+      end: () => BUFFEND_ONE + index * INC + INC,
+      markers: true
     },
-    x: 150,
-    y: 300,
-    rotate: 15 - (Math.sin(index * Math.PI / 2 - (Math.PI / 2)) * 10),
-    scale: 1.3
+    opacity: 0
   });
 });
-rightLeaves.forEach((leaf, i) => {
-  const index = i / (rightLeaves.length - 1);
-  gsap.set(leaf, {
-    rotate: index * 45 - 10,
-    transformOrigin: 'left bottom'
-  });
-  gsap.to(leaf, {
+// There was a marionette
+const BUFFEND_TWO = BLURBEND_ONE.length * INC + INC + PADDING;
+BLURBEND_TWO.forEach((word, index) => {
+  to(word, {
     scrollTrigger: {
-      trigger: "body",
-      scrub: 0.2,
-      start: `${index * 40}% top`,
-      end: `${index * 60 + 40}% bottom`,
+      scrub: true,
+      start: () => BUFFEND_TWO + index * INC,
+      end: () => BUFFEND_TWO + index * INC + INC,
+      markers: true
     },
-    x: -150,
-    y: 300,
-    rotate: -15 + (Math.sin(index * Math.PI / 2 - (Math.PI / 2)) * 10),
-    scale: 1.3
+    opacity: 1
   });
 });
 
-smallLeaves.forEach((leaf, i) => {
-  gsap.set(leaf, {
-    y: Math.random() * 900,
-    x: Math.random() * 1000,
-    scale: Math.random() * 0.5 + 0.2,
-    transformOrigin: '50% 50%'
-  });
-  const start = Math.random() * 40 + 40;
-  const end = Math.min(100, start + Math.random() * 50);
-  gsap.to(leaf, {
+// Hide the marionette text
+const BUFFEND_THREE = BUFFEND_TWO + BLURBEND_TWO.length * INC + INC + PADDING;
+BLURBEND_TWO.forEach((word, index) => {
+  to(word, {
     scrollTrigger: {
-      trigger: "body",
-      scrub: 0.2,
-      start: `top top`,
-      end: `bottom bottom`
+      scrub: true,
+      start: () => BUFFEND_THREE + index * INC,
+      end: () => BUFFEND_THREE + index * INC + INC,
+      markers: true
     },
-    scale: Math.random() * 0.5 + 0.2,
-    x: Math.random() * 1600,
-    y: Math.random() * 900,
-    rotate: Math.random() * 1000 + 360
+    opacity: 0
   });
 });
 
-letters.forEach((letter, i) => {
-  gsap.from(letter, {
+// And they lied
+const BUFFEND_FOUR = BUFFEND_THREE + BLURBEND_TWO.length * INC + INC;
+BLURBEND_THREE.forEach((word, index) => {
+  to(word, {
     scrollTrigger: {
-      trigger: "body",
-      scrub: 0.2,
-      start: `${(i / (letters.length - 1)) * 50 + 30}% bottom`,
-      end: `${(i / (letters.length - 1)) * 50 + 50}% bottom`
+      scrub: true,
+      start: () => BUFFEND_FOUR + index * INC,
+      end: () => BUFFEND_FOUR + index * INC + INC,
+      markers: true
     },
-    opacity: 0,
-    y: '+=100',
-    rotate: 180,
-    scale: 2,
-    transformOrigin: '50% 50%'
+    opacity: 1
+  });
+});
+const BUFFEND_FIVE = BUFFEND_FOUR + BLURBEND_THREE.length * INC + INC + PADDING;
+
+
+BLURBEND_FOUR.forEach((word, index) => {
+  to(word, {
+    opacity: 1,
+    scrollTrigger: {
+      scrub: true,
+      start: () => BUFFEND_FIVE + index * INC,
+      end: () => BUFFEND_FIVE + index * INC + INC,
+      markers: false
+    }
   });
 });
 
-// Hack to hide the render of the SVG
-requestAnimationFrame(() => {
-  document.querySelector('svg').style.opacity = 1;
-});
-
+document.body.style.height = `${
+  BUFFEND_FIVE + BLURBEND_FOUR.length * INC + INC + PADDING + window.innerHeight
+}px`;
