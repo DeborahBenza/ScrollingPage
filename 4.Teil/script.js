@@ -1,7 +1,8 @@
-//More info about this project and the newer optimized version: https://isladjan.com/work/4/
-//Author: isladjan - https://isladjan.com/
 
+// Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
+
+
 
 let speed = 100;
 let height = document.querySelector("svg").getBBox().height;
@@ -45,14 +46,12 @@ scene1.to("#cloudStart-R", { x: 300 }, 0);
 //animate text
 //scene1.to("#info", { y: 5 * speed }, 0);
 // Optimierte Animation mit GSAP
-scene1.to("#info", { 
-    y: 5 * speed,        // Vertikale Bewegung
-    opacity: 1,          // Sicherstellen, dass das Element sichtbar ist
-    ease: "power2.out",  // Weiche Bewegung (Easing)
-    stagger: 0.2         // Zeitliche Staffelung, falls mehrere Elemente im Text enthalten sind
-
-    
-}, 0);
+// Typewriter-Effekt für das #info-Element
+// Typewriter-Effekt für das #info-Element
+// Function to animate text with ScrollTrigger
+//animate text
+//scene1.to("#info", { y: 5 * speed }, 0);
+// Optimierte Animation mit GSAP
 
 
 /*   Bird   */
