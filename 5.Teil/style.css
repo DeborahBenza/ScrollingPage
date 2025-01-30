@@ -5,21 +5,36 @@
   font-display: swap;
 }
 
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Schoolbell';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/schoolbell-v18-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
 * {
   box-sizing: border-box;
 }
 
+p {
+  font-family: 'Schoolbell';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/schoolbell-v18-latin-regular.woff2') format('woff2');
+}
+
 .bodyteilfünf {
   background: #00211c;
-  font-family: "Jungle_Roar";
+  font-family: 'Schoolbell';
   height: 400vh;
   width: 100vw;
 }
 
 .bodyteilfünfzwei {
   background: #e7dc94;
-  font-family: "Jungle_Roar";
-  height: 700vh;
+  font-family: 'Schoolbell';
+  height: 200vh;
   width: 100vw;
 
 }

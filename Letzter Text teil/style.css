@@ -8,6 +8,19 @@
 
 }
 
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Schoolbell';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/schoolbell-v18-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+
+h1 {
+  font-family: 'Schoolbell';
+}
+
 
 
 
@@ -54,4 +67,25 @@
 .blurbend--three .word,
 .blurbend--four .word {
   opacity: 0;
+}
+
+
+button {
+  font: 40px 'Cinzel', serif;
+  display: block;
+  margin-top: 700px;
+  margin-left: 700px;
+  padding: 20px 30px;
+  background-color: transparent;
+  color: rgb(255, 255, 255);
+  border: 1px solid #f7f4f4;
+  border-radius: 10px;
+  cursor: pointer;
+  
+  transition-delay: 3s;
+transition-property:border;
+  z-index: 1;
+  letter-spacing: 0.15em;
+
+  font-family: 'Schoolbell';
 }
