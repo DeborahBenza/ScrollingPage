@@ -92,7 +92,7 @@ gsap.to(animatedPath, {
   scrollTrigger: {
     trigger: ".bodyteilfünfzwei",  // Den Bereich, der den Pfad enthält
     start: "top 70%",   // Beginnt bei 70% des Viewports
-    end: "top 0%",     // Endet bei 20%
+    end: "top 20%",     // Endet bei 20%
     scrub: true,        // Macht die Animation an den Scrollvorgang gebunden
 
   }
