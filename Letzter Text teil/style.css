@@ -1,4 +1,3 @@
-
 :root {
   --size: 90;
   --ar: calc(194.8 / 596.69);
@@ -27,48 +26,56 @@ h1 {
 
 .storyend {
   background-color: rgb(0, 0, 0);
- 
+
   height: 100vh;
   width: 100vw;
   position: fixed;
   overflow: hidden;
 }
+
 .storyend__content {
   color: #ad2020;
   position: absolute;
   width: var(--width);
   text-align: center;
-  left : 50%;
+  left: 50%;
   transform: translate(-50%, var(--y));
 }
+
 .storyend__content--bottom {
- 
+
   text-align: center;
   top: 50%;
   --y: calc(0% + (var(--height) / 4));
 }
+
 .storyend__content--top {
-  
+
   bottom: 50%;
   text-align: center;
   --y: calc(0% - (var(--height) / 4));
 }
+
 .storyend__content--bottom .blurbend {
   top: 0;
 }
+
 .storyend__content--top .blurbend {
   bottom: 0;
 }
+
 .blurbend {
   position: absolute;
   visibility: hidden;
 }
+
 .blurbend--two .word,
 .blurbend--three .word,
 .blurbend--four .word {
   opacity: 0;
 }
 
+<<<<<<< HEAD
 
 button {
   font: 40px 'Cinzel', serif;
@@ -88,4 +95,16 @@ transition-property:border;
   letter-spacing: 0.15em;
 
   font-family: 'Schoolbell';
+=======
+.sos {
+  height: 700vh;
+}
+
+
+.endeschrift {
+  fill: none;
+  stroke: #cbcbab;
+  stroke-miterlimit: 10;
+  stroke-width: 2px;
+>>>>>>> bb04999473f903afd9aad7d71866efca15c08e63
 }
