@@ -445,7 +445,7 @@ window.onload = function() {
 
 document.getElementById("myButton").addEventListener("click", function() {
     console.log("Märchenreise wurde gestartet...");
-    window.location.href = '../versuch/index.html';
+    window.location.href = '/rotkaeppchen/versuch/index.html';
 });
 
 
