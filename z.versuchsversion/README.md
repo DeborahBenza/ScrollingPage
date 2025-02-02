@@ -1,3 +1,0 @@
-# ScrollingPage
-
-Hey
