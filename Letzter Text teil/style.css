@@ -75,13 +75,11 @@ h1 {
   opacity: 0;
 }
 
-<<<<<<< HEAD
-
 button {
   font: 40px 'Cinzel', serif;
   display: block;
   margin-top: 700px;
-  margin-left: 700px;
+  margin-left: 800px;
   padding: 20px 30px;
   background-color: transparent;
   color: rgb(255, 255, 255);
@@ -93,18 +91,4 @@ button {
 transition-property:border;
   z-index: 1;
   letter-spacing: 0.15em;
-
-  font-family: 'Schoolbell';
-=======
-.sos {
-  height: 700vh;
-}
-
-
-.endeschrift {
-  fill: none;
-  stroke: #cbcbab;
-  stroke-miterlimit: 10;
-  stroke-width: 2px;
->>>>>>> bb04999473f903afd9aad7d71866efca15c08e63
 }
